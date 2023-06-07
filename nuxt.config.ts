@@ -16,6 +16,7 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
+      title: 'Clone of AliExpress',
       script: [{ src: 'https://js.stripe.com/v3/', defer: true }],
     },
   },
