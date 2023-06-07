@@ -21,58 +21,12 @@
 
 <script setup>
 import MainLayout from '~/layouts/MainLayout.vue'
+import { useUserStore } from '~/stores/user'
+const userStore = useUserStore()
 
-const products = {
-  data: [
-    {
-      id: 1,
-      title: 'Title 1',
-      description: 'This is a description',
-      url: 'https://picsum.photos/id/71/800/800',
-      price: 19999,
-    },
-    {
-      id: 2,
-      title: 'Title 2',
-      description: 'This is a description',
-      url: 'https://picsum.photos/id/72/800/800',
-      price: 29999,
-    },
-    {
-      id: 3,
-      title: 'Title 3',
-      description: 'This is a description',
-      url: 'https://picsum.photos/id/73/800/800',
-      price: 39999,
-    },
-    {
-      id: 4,
-      title: 'Title 4',
-      description: 'This is a description',
-      url: 'https://picsum.photos/id/74/800/800',
-      price: 49999,
-    },
-    {
-      id: 5,
-      title: 'Title 5',
-      description: 'This is a description',
-      url: 'https://picsum.photos/id/75/800/800',
-      price: 59999,
-    },
-    {
-      id: 6,
-      title: 'Title 6',
-      description: 'This is a description',
-      url: 'https://picsum.photos/id/76/800/800',
-      price: 69999,
-    },
-    {
-      id: 7,
-      title: 'Title 7',
-      description: 'This is a description',
-      url: 'https://picsum.photos/id/77/800/800',
-      price: 79999,
-    },
-  ],
-}
+let products = ref(null)
+onBeforeMount(async () => {
+  products.value = await useFetch('/api/prisma/get-all-products')
+  setTimeout(() => (userStore.isLoading = false), 1000)
+})
 </script>
